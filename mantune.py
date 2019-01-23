@@ -29,8 +29,6 @@ p.start(strt)# starting duty cycle ( it set the servo to 0 degree )
 p2.start(strt)
 p3.start(strt)
 
-
-
 #angle= float(input("angle(5=0 --> 10=180: "))
 try:
     while True:
