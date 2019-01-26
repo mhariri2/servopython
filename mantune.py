@@ -1,7 +1,7 @@
 import numpy
 import RPi.GPIO as GPIO
 import time
-
+ 
 servo = 22
 servo2= 18
 servo3= 16
