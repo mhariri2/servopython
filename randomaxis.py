@@ -57,7 +57,7 @@ def resetposition():
 def positions():
        arr =[]
        for i in range(n):
-          row = [getdc(getrandom(135),135),getdc(getrandom(135),135),getdc(getrandom(90),90)]
+          row = [getdc(getrandom(135),135),getdc(getrandom(135),135),getdc(getrandom(135),135)]
           arr += [row]
        return arr
 
