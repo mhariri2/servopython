@@ -11,6 +11,13 @@ from Kalman import KalmanAngle
 import smbus            #import SMBus module of I2C
 import time
 import math
+import numpy
+import RPi.GPIO as GPIO
+servo=13
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(servo,GPIO.OUT)
+p=GPIO.PWM(servo,50)# 50hz frequency
+p.start(2.5)# starting duty cycle ( it set the servo to 0 degree )
 
 kalmanX = KalmanAngle()
 kalmanY = KalmanAngle()
@@ -167,8 +174,13 @@ while True:
         #pitch is the angle of the board held horizontally front to back
         #print("Angle X: " + str(kalAngleX)+"   " +"Angle Y: " + str(kalAngleY))
         print(str("{:.2f}".format(roll))+"  "+str("{:.2f}".format(pitch)))
+        degree=roll
+        angle=((degree+135)/27)+2.3
+        p.ChangeDutyCycle(angle)
         #print(str(roll)+"  "+str(gyroXAngle)+"  "+str(compAngleX)+"  "+str(kalAngleX)+"  "+str(pitch)+"  "+str(gyroYAngle)+"  "+str(compAngleY)+"  "+str(kalAngleY))
         time.sleep(0.005)
 
     except Exception as exc:
         flag += 1
+    except KeyboardInterrupt:
+        GPIO.cleanup()
