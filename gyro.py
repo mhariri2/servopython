@@ -1,7 +1,5 @@
-#!/usr/bin/python
 import smbus
 import math
-import Tkinter as tk
  
 # Register
 power_mgmt_1 = 0x6b
@@ -39,16 +37,20 @@ address = 0x68       # via i2cdetect
  
 # Aktivieren, um das Modul ansprechen zu koennen
 bus.write_byte_data(address, power_mgmt_1, 0)
+ 
+print("Gyroskop")
+print( "--------")
+ 
 gyroskop_xout = read_word_2c(0x43)
 gyroskop_yout = read_word_2c(0x45)
 gyroskop_zout = read_word_2c(0x47)
  
-print ("gyroskop_xout: ", ("%5d" % gyroskop_xout), " skaliert: ", (gyroskop_xout / 131))
-print ("gyroskop_yout: ", ("%5d" % gyroskop_yout), " skaliert: ", (gyroskop_yout / 131))
-print ("gyroskop_zout: ", ("%5d" % gyroskop_zout), " skaliert: ", (gyroskop_zout / 131))
+print("gyroskop_xout: ", ("%5d" % gyroskop_xout), " skaliert: ", (gyroskop_xout / 131))
+print("gyroskop_yout: ", ("%5d" % gyroskop_yout), " skaliert: ", (gyroskop_yout / 131))
+print("gyroskop_zout: ", ("%5d" % gyroskop_zout), " skaliert: ", (gyroskop_zout / 131))
  
 print("")
-print("Sensor")
+print("Beschleunigungssensor")
 print("---------------------")
  
 beschleunigung_xout = read_word_2c(0x3b)
@@ -65,40 +67,3 @@ print("beschleunigung_zout: ", ("%6d" % beschleunigung_zout), " skaliert: ", bes
  
 print("X Rotation: " , get_x_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert))
 print("Y Rotation: " , get_y_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert))
-
-counter = 0 
-def counter_label(label,labelz):
-  def count():
-    global counter
-    counter += 1
-    labels=[]
-    bus.write_byte_data(address, power_mgmt_1, 0)
-    gyroskop_xout = read_word_2c(0x43)
-    gyroskop_yout = read_word_2c(0x45)
-    gyroskop_zout = read_word_2c(0x47)
-    beschleunigung_xout = read_word_2c(0x3b)
-    beschleunigung_yout = read_word_2c(0x3d)
-    beschleunigung_zout = read_word_2c(0x3f)
-    beschleunigung_xout_skaliert = beschleunigung_xout / 16384.0
-    beschleunigung_yout_skaliert = beschleunigung_yout / 16384.0
-    beschleunigung_zout_skaliert = beschleunigung_zout / 16384.0
-    label.config(text=get_x_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert))
-    label.pack()
-    labels.append(label)
-    labelz.config(text=get_y_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert))
-    labelz.pack()
-    labels.append(labelz)
-    label.after(100, count)
-  count()
- 
- 
-root = tk.Tk()
-root.title("Counting Seconds")
-label = tk.Label(root, fg="green")
-label.pack()
-labelz = tk.Label(root, fg="green")
-labelz.pack()
-counter_label(label,labelz)
-button = tk.Button(root, text='Stop', width=25, command=root.destroy)
-button.pack()
-root.mainloop()
