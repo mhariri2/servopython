@@ -2,9 +2,9 @@ import numpy
 import RPi.GPIO as GPIO
 import time
  
-servo = 22
-servo2= 18
-servo3= 16
+servo = 5
+servo2= 13
+servo3= 26
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -32,7 +32,7 @@ p3.start(strt)
 #angle= float(input("angle(5=0 --> 10=180: "))
 try:
     while True:
-       degreetext=raw_input("Degree: ")
+       degreetext=input("Degree: ")
        degree=float(degreetext)
        angle=((degree+135)/27)+2.3
        p.ChangeDutyCycle(angle)
