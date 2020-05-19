@@ -13,11 +13,17 @@ import time
 import math
 import numpy
 import RPi.GPIO as GPIO
-servo=13
+
+def setservo(servo):
+    GPIO.setup(servo,GPIO.OUT)
+    p=GPIO.PWM(servo,50)# 50hz frequency
+    p.start(2.5)# starting duty cycle ( it set the servo to 0 degree )
+    return p
+
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(servo,GPIO.OUT)
-p=GPIO.PWM(servo,50)# 50hz frequency
-p.start(2.5)# starting duty cycle ( it set the servo to 0 degree )
+s1= setservo(13)
+s2= setservo(5)
+#s3= setservo(19)
 
 kalmanX = KalmanAngle()
 kalmanY = KalmanAngle()
@@ -38,6 +44,7 @@ ACCEL_ZOUT_H = 0x3F
 GYRO_XOUT_H  = 0x43
 GYRO_YOUT_H  = 0x45
 GYRO_ZOUT_H  = 0x47
+
 
 
 #Read the gyro and acceleromater values from MPU6050
@@ -173,10 +180,11 @@ while True:
         #roll is the angle of the board held horizontally
         #pitch is the angle of the board held horizontally front to back
         #print("Angle X: " + str(kalAngleX)+"   " +"Angle Y: " + str(kalAngleY))
-        print(str("{:.2f}".format(roll))+"  "+str("{:.2f}".format(pitch)))
-        degree=roll
-        angle=((degree+135)/27)+2.3
-        p.ChangeDutyCycle(angle)
+        print(str("{:.3f}".format(roll))+"  "+str("{:.3f}".format(pitch)))
+        rollangle=((roll+135)/27)+2.3
+        s1.ChangeDutyCycle(rollangle)
+        pitchangle=((pitch+135)/27)+2.3
+        s2.ChangeDutyCycle(pitchangle)
         #print(str(roll)+"  "+str(gyroXAngle)+"  "+str(compAngleX)+"  "+str(kalAngleX)+"  "+str(pitch)+"  "+str(gyroYAngle)+"  "+str(compAngleY)+"  "+str(kalAngleY))
         time.sleep(0.005)
 
