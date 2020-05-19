@@ -2,9 +2,9 @@ import numpy
 import RPi.GPIO as GPIO
 import time
 
-servo = 22
-servo2= 18
-servo3= 16
+servo = 5
+servo2= 6
+servo3= 13
 
 GPIO.setmode(GPIO.BOARD)
 
