@@ -41,4 +41,4 @@ bearing  = math.atan2(y_out, x_out)
 if (bearing < 0):
     bearing += 2 * math.pi
 
-print "Bearing: ", math.degrees(bearing)
+print("Bearing: ", math.degrees(bearing))
