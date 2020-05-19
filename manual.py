@@ -2,11 +2,11 @@ import numpy
 import RPi.GPIO as GPIO
 import time
 
-servo = 5
-servo2= 26
-servo3= 13
+servo = 17
+servo2= 13
+servo3= 19
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(servo,GPIO.OUT)
 GPIO.setup(servo2,GPIO.OUT)
 GPIO.setup(servo3,GPIO.OUT)
