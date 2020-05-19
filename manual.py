@@ -3,11 +3,10 @@ import RPi.GPIO as GPIO
 import time
 
 servo = 5
-servo2= 6
+servo2= 26
 servo3= 13
 
 GPIO.setmode(GPIO.BOARD)
-
 GPIO.setup(servo,GPIO.OUT)
 GPIO.setup(servo2,GPIO.OUT)
 GPIO.setup(servo3,GPIO.OUT)
