@@ -23,7 +23,10 @@ def setservo(servo):
 GPIO.setmode(GPIO.BCM)
 s1= setservo(13)
 s2= setservo(5)
-#s3= setservo(19)
+s3= setservo(17)
+GPIO.setup(25, GPIO.OUT)
+pwm = GPIO.PWM(25, 50)
+pwm.start(0)
 
 kalmanX = KalmanAngle()
 kalmanY = KalmanAngle()
@@ -180,11 +183,15 @@ while True:
         #roll is the angle of the board held horizontally
         #pitch is the angle of the board held horizontally front to back
         #print("Angle X: " + str(kalAngleX)+"   " +"Angle Y: " + str(kalAngleY))
-        print(str("{:.3f}".format(roll))+"  "+str("{:.3f}".format(pitch)))
+        
         rollangle=((roll+135)/27)+2.3
         s1.ChangeDutyCycle(rollangle)
         pitchangle=((pitch+135)/27)+2.3
+        headangle=((roll+135)/27)+2.3*-1
         s2.ChangeDutyCycle(pitchangle)
+        s3.ChangeDutyCycle(headangle)
+        pwm.ChangeDutyCycle(abs(roll))
+        print(str("{:.3f}".format(roll))+"  "+str("{:.3f}".format(pitch))+" "+str(pitchangle))
         #print(str(roll)+"  "+str(gyroXAngle)+"  "+str(compAngleX)+"  "+str(kalAngleX)+"  "+str(pitch)+"  "+str(gyroYAngle)+"  "+str(compAngleY)+"  "+str(kalAngleY))
         time.sleep(0.005)
 
@@ -192,3 +199,4 @@ while True:
         flag += 1
     except KeyboardInterrupt:
         GPIO.cleanup()
+        pwm.stop()
