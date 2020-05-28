@@ -1,5 +1,5 @@
 #https://learn.adafruit.com/adafruit-vl53l0x-micro-lidar-distance-sensor-breakout/python-circuitpython
-
+#sudo pip3 install adafruit-circuitpython-vl53l0x
 # Simple demo of the VL53L0X distance sensor.
 # Will print the sensed range/distance every second.
 import time

@@ -25,7 +25,7 @@ s1= setservo(13)
 s2= setservo(5)
 s3= setservo(17)
 GPIO.setup(25, GPIO.OUT)
-pwm = GPIO.PWM(25, 50)
+pwm = GPIO.PWM(25, 50) #Pin 25 is PWM
 pwm.start(0)
 
 kalmanX = KalmanAngle()
