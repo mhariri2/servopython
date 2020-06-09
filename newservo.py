@@ -5,7 +5,7 @@ from adafruit_servokit import ServoKit
 # 8 for FeatherWing, 16 for Shield/HAT/Bonnet.
 kit = ServoKit(channels=16)
 while True:
-    kit.servo[8].angle = 0
+    #kit.servo[8].angle = 0
     #kit.servo[9].angle = 0
     #kit.servo[10].angle = 0
     time.sleep(3)
@@ -17,9 +17,9 @@ while True:
     print('90')
     time.sleep(2)
     
-    kit.servo[8].angle = 180
+    #kit.servo[8].angle = 180
     #kit.servo[9].angle = 180
     #kit.servo[10].angle = 180
-    time.sleep(5)
+    time.sleep(2)
     print('180')
 

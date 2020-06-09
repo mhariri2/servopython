@@ -177,10 +177,10 @@ while True:
         rollangle=((roll+135)/27)+2.3
         pitchangle=((pitch+135)/27)+2.3
         headangle=((roll+135)/27)+2.3*-1
-        #kit.servo[8].angle = roll
-        kit.servo[9].angle= pitch
-        #kit.servo[10].angle= headangle  
-        print(str("{:.3f}".format(roll))+"  "+str("{:.3f}".format(pitch))+" "+str(headangle))
+        kit.servo[8].angle = roll*-1+90 #Head
+        kit.servo[9].angle= pitch+90 #body
+        kit.servo[10].angle= roll+90 #base
+        print("Roll> "+str("{:.3f}".format(roll))+" pitch> "+str("{:.3f}".format(pitch))+" "+str(headangle))
         #print(str(roll)+"  "+str(gyroXAngle)+"  "+str(compAngleX)+"  "+str(kalAngleX)+"  "+str(pitch)+"  "+str(gyroYAngle)+"  "+str(compAngleY)+"  "+str(kalAngleY))
         time.sleep(0.005)
 
