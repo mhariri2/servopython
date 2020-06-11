@@ -188,12 +188,13 @@ while True:
         rollangle=((roll+135)/27)+2.3
         pitchangle=((pitch+135)/27)+2.3
         headangle=((roll+135)/27)+2.3*-1
-        kit.servo[8].angle = roll*-1+90 #Head
+        head = roll*-1+90 #Head
         distance = float(vl53.range) 
         if distance < 200:
-            kit.servo[9].angle= pitch+90 + distance*.3 #body
+            kit.servo[8].angle= head + distance*.3 #body
         else:    
-            kit.servo[9].angle= pitch+90 #body
+            kit.servo[9].angle= head #body
+        kit.servo[9].angle= pitch+90 #body
         kit.servo[10].angle= roll+90 #base
         print("Range: {0}mm".format(vl53.range))
         print("Roll> "+str("{:.3f}".format(roll))+" pitch> "+str("{:.3f}".format(pitch))+" "+str(headangle))
