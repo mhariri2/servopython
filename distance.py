@@ -5,8 +5,6 @@
 import time
 import busio
 import board
-
- 
 import adafruit_vl53l0x
  
 # Initialize I2C bus and sensor.

@@ -14,6 +14,17 @@ import math
 import numpy
 import RPi.GPIO as GPIO
 from adafruit_servokit import ServoKit
+#sudo pip3 install adafruit-circuitpython-vl53l0x
+# Simple demo of the VL53L0X distance sensor.
+# Will print the sensed range/distance every second.
+import time
+import busio
+import board
+import adafruit_vl53l0x
+
+# Initialize I2C bus and sensor.
+i2c = busio.I2C(board.SCL, board.SDA)
+vl53 = adafruit_vl53l0x.VL53L0X(i2c)
 
 kit = ServoKit(channels=16)
 
@@ -178,8 +189,13 @@ while True:
         pitchangle=((pitch+135)/27)+2.3
         headangle=((roll+135)/27)+2.3*-1
         kit.servo[8].angle = roll*-1+90 #Head
-        kit.servo[9].angle= pitch+90 #body
+        distance = float(vl53.range) 
+        if distance < 200:
+            kit.servo[9].angle= pitch+90 + distance*.3 #body
+        else:    
+            kit.servo[9].angle= pitch+90 #body
         kit.servo[10].angle= roll+90 #base
+        print("Range: {0}mm".format(vl53.range))
         print("Roll> "+str("{:.3f}".format(roll))+" pitch> "+str("{:.3f}".format(pitch))+" "+str(headangle))
         #print(str(roll)+"  "+str(gyroXAngle)+"  "+str(compAngleX)+"  "+str(kalAngleX)+"  "+str(pitch)+"  "+str(gyroYAngle)+"  "+str(compAngleY)+"  "+str(kalAngleY))
         time.sleep(0.005)
