@@ -196,6 +196,9 @@ while True:
             kit.servo[9].angle= head #body
         kit.servo[9].angle= pitch+90 #body
         kit.servo[10].angle= roll+90 #base
+
+        kit.servo[0].angle= roll+90 #right
+        kit.servo[1].angle= roll+90 #left 
         print("Range: {0}mm".format(vl53.range))
         print("Roll> "+str("{:.3f}".format(roll))+" pitch> "+str("{:.3f}".format(pitch))+" "+str(headangle))
         #print(str(roll)+"  "+str(gyroXAngle)+"  "+str(compAngleX)+"  "+str(kalAngleX)+"  "+str(pitch)+"  "+str(gyroYAngle)+"  "+str(compAngleY)+"  "+str(kalAngleY))
